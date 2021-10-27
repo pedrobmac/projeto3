@@ -5,7 +5,7 @@
   "main": "./api/index.js",
   "scripts": {
     "start": "nodemon .api/index.js",
-    "test": "./node_modules/.bin/nodemon --inspect index.js"
+    "test": "./node_modules/.bin/nodemon --inspect api/index.js"
   },
   "keywords": [],
   "author": "",

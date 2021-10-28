@@ -13,9 +13,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Pessoas.init({
-    nome: DataTypes.STRING,
+    nome: {
+      type: DataTypes.STRING,
+      validate: {
+        funcaoValidadora: function (dado) {
+          if (dado.length < 3) {
+            throw new Error("Nome menor que o tamanho mínimo")
+          }
+        }
+      }
+    },
     ativo: DataTypes.BOOLEAN,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: "dado do tipo e-mail inválido"
+        }
+      }
+    },
     role: DataTypes.STRING
   }, {
     sequelize,
@@ -27,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     scopes: {
-      todos: {where: {}},
+      todos: { where: {} },
       //etc: {constrain: valor}
     }
   });
